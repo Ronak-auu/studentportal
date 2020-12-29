@@ -32,8 +32,8 @@ public class TeacherService {
         return "Teacher Removed  !" + id ;
     };
 
-    public Teacher updateTeacher(Teacher teacher){
-        Teacher existingTeacher = teacherDao.findById(teacher.getTeacherId()).orElse(null);
+    public Teacher updateTeacher(String id,Teacher teacher){
+        Teacher existingTeacher = teacherDao.findById(id).orElse(null);
         existingTeacher.setTeacherEmail(teacher.getTeacherEmail());
         existingTeacher.setTeacherName(teacher.getTeacherName());
         existingTeacher.setTeacherGender(teacher.getTeacherGender());

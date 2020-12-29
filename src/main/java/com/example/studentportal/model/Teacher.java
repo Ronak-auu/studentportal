@@ -1,5 +1,6 @@
 package com.example.studentportal.model;
 
+import com.sun.istack.NotNull;
 import jdk.jfr.DataAmount;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,13 +15,19 @@ import javax.persistence.Table;
 @Table(name="teacher")
 public class Teacher {
 
-    @Id
+    @Id @NotNull
     private String teacherId;
+    @NotNull
     private String teacherName;
+    @NotNull
     private String teacherEmail;
+    @NotNull
     private String teacherGender;
+    @NotNull
     private String teacherDob;
+    @NotNull
     private String teacherPhone;
+    @NotNull
     private String teacherAddress;
 
     public Teacher() {

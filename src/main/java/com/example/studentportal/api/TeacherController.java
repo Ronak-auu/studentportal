@@ -4,8 +4,10 @@ import com.example.studentportal.model.Teacher;
 import com.example.studentportal.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,7 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @PostMapping("admin/addTeacher")
-    public Teacher addTeacher(@RequestBody Teacher teacher){
+    public Teacher addTeacher(@NonNull @Valid @RequestBody Teacher teacher){
         return teacherService.saveTeacher(teacher);
     }
 
@@ -28,9 +30,9 @@ public class TeacherController {
         return teacherService.getTeacherById(id);
     }
 
-    @PutMapping("admin/updateTeacher")
-    public Teacher updateTeacher(@RequestBody Teacher teacher){
-        return teacherService.updateTeacher(teacher);
+    @PutMapping("admin/updateTeacher/{id}")
+    public Teacher updateTeacher(@PathVariable("id") String id,@NonNull @Valid @RequestBody Teacher teacher){
+        return teacherService.updateTeacher(id,teacher);
     }
 
     @DeleteMapping("admin/deleteTeacher/{id}")
