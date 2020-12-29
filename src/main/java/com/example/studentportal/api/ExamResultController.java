@@ -26,4 +26,14 @@ public class ExamResultController {
     public List<ExamResult> getResultByIdAndType(@PathVariable("id") String id, @PathVariable("type") String type){
         return examResultService.getResultByIdAndType(id,type);
     }
+
+    @PutMapping
+    public int updateResultByIdAndType(@Valid @NonNull @RequestBody ExamResult e){
+        return examResultService.updateResultByIdAndType(e);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public int deleteResultById(@PathVariable("id") String id){
+        return examResultService.deleteResultById(id);
+    }
 }

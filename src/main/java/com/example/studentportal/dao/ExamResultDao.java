@@ -2,6 +2,7 @@ package com.example.studentportal.dao;
 
 import com.example.studentportal.model.ExamResult;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -25,6 +26,16 @@ public interface ExamResultDao extends JpaRepository<ExamResult,String> {
     @Query(value = "SELECT * FROM Subject s WHERE s.subjectId = :subjectid",nativeQuery = true)
     String checkSubjectExist(@Param("subjectid") String subjectid);
 
+    @Modifying
+    @Query(value = "UPDATE ExamResult e SET e.examDate = :date, e.examInternalMark = :imark," +
+            "e.examExternalMark = :emark,e.attendance = :attendance WHERE e.studentId = :studentid " +
+            "AND e.subjectId = :subjectid AND e.examType = :type",nativeQuery = true)
+    int updateResultByIdAndType(@Param("studentid") String studentid,@Param("subjectid") String subjectid,
+                                       @Param("type") String type, @Param("date") String date,
+                                       @Param("imark") String imark, @Param("emark") String emark,
+                                       @Param("attendance") String attendance);
 
-
+    @Modifying
+    @Query("DELETE FROM ExamResult e where e.studentId = :id")
+    int deleteResultById(@Param("id") String id);
 }
