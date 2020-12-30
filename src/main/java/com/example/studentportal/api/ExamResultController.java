@@ -32,6 +32,7 @@ public class ExamResultController {
         return examResultService.updateResultByIdAndType(e);
     }
 
+    //Student Id
     @DeleteMapping(path = "{id}")
     public int deleteResultById(@PathVariable("id") String id){
         return examResultService.deleteResultById(id);
