@@ -11,31 +11,33 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("admin/teacher")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TeacherController {
 
     @Autowired
     private TeacherService teacherService;
 
-    @PostMapping("admin/addTeacher")
+    @PostMapping
     public Teacher addTeacher(@NonNull @Valid @RequestBody Teacher teacher){
         return teacherService.saveTeacher(teacher);
     }
 
-    @GetMapping("admin/teachers")
+    @GetMapping
     public List<Teacher> findAllTeachers(){
         return teacherService.getTeachers();
     }
-    @GetMapping("admin/teacher/{id}")
+    @GetMapping(path = "{id}")
     public Teacher findTeacherByID(@PathVariable("id") String id){
         return teacherService.getTeacherById(id);
     }
 
-    @PutMapping("admin/updateTeacher/{id}")
+    @PutMapping(path = "{id}")
     public Teacher updateTeacher(@PathVariable("id") String id,@NonNull @Valid @RequestBody Teacher teacher){
         return teacherService.updateTeacher(id,teacher);
     }
 
-    @DeleteMapping("admin/deleteTeacher/{id}")
+    @DeleteMapping(path = "{id}")
     public String deleteTeacher(@PathVariable("id") String id){
         return teacherService.deleteTeacher(id);
     }

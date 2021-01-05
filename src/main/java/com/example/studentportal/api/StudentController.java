@@ -13,6 +13,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("admin/student")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StudentController {
 
     @Autowired
