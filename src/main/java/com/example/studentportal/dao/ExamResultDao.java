@@ -15,6 +15,10 @@ public interface ExamResultDao extends JpaRepository<ExamResult,String> {
             nativeQuery = true)
     List<ExamResult> getResultByIdAndType(@Param("id") String id, @Param("type") String type);
 
+    @Query(value = "SELECT * FROM ExamResult e WHERE e.studentId = :id",
+            nativeQuery = true)
+    List<ExamResult> getResultByStudentId(@Param("id") String id);
+
     @Query(value = "SELECT * FROM ExamResult e WHERE e.examType = :type AND e.studentId = :studentid " +
             "AND e.subjectId = :subjectid",
             nativeQuery = true)
@@ -36,6 +40,6 @@ public interface ExamResultDao extends JpaRepository<ExamResult,String> {
                                        @Param("attendance") String attendance);
 
     @Modifying
-    @Query("DELETE FROM ExamResult e where e.studentId = :id")
+    @Query("DELETE FROM ExamResult e where e.examId = :id")
     int deleteResultById(@Param("id") String id);
 }

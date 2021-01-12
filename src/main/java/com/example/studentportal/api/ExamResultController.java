@@ -27,13 +27,21 @@ public class ExamResultController {
     public List<ExamResult> getResultByIdAndType(@PathVariable("id") String id, @PathVariable("type") String type){
         return examResultService.getResultByIdAndType(id,type);
     }
+    @GetMapping(path = "{id}")
+    public List<ExamResult> getResultByStudentId(@PathVariable("id") String id){
+        return examResultService.getResultByStudentId(id);
+    }
+    @GetMapping(path = "result/{id}")
+    public ExamResult getResultByResultId(@PathVariable("id") String id){
+        return examResultService.getResultByResultId(id);
+    }
 
     @PutMapping
     public int updateResultByIdAndType(@Valid @NonNull @RequestBody ExamResult e){
         return examResultService.updateResultByIdAndType(e);
     }
 
-    //Student Id
+    //Result Id
     @DeleteMapping(path = "{id}")
     public int deleteResultById(@PathVariable("id") String id){
         return examResultService.deleteResultById(id);

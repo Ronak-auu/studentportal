@@ -11,7 +11,7 @@ import java.util.List;
 public interface MaterialDao extends JpaRepository<Material,String> {
 
     @Query(value = "SELECT * FROM Material e WHERE e.subjectId = :id", nativeQuery = true)
-    List<Material> getMaterialById(@Param("id") String id);
+    List<Material> getMaterialBySubjectId(@Param("id") String id);
 
     @Query(value = "SELECT * FROM Subject s WHERE s.subjectId = :subjectid",nativeQuery = true)
     String checkSubjectExists(@Param("subjectid") String subjectid);

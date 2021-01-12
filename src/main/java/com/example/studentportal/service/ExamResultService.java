@@ -38,6 +38,14 @@ public class ExamResultService {
         return examResultDao.getResultByIdAndType(id,type);
     }
 
+    public List<ExamResult> getResultByStudentId(String id){
+        return examResultDao.getResultByStudentId(id);
+    }
+
+    public ExamResult getResultByResultId(String id) {
+        return examResultDao.findById(id).orElse(null);
+    }
+
     public int updateResultByIdAndType(ExamResult examResult){
         return examResultDao.updateResultByIdAndType(examResult.getStudentId(),examResult.getSubjectId(),
                 examResult.getExamType(),examResult.getExamDate(),examResult.getExamInternalMark(),
@@ -47,4 +55,6 @@ public class ExamResultService {
     public int deleteResultById(String id){
         return examResultDao.deleteResultById(id);
     }
+
+
 }
