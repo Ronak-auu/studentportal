@@ -22,9 +22,14 @@ public class MaterialService {
             return "Subject not exists";
         }
     }
-
-    public List<Material> getMaterialById(String id){
-        return materialDao.getMaterialById(id);
+    public List<Material> getAllMaterial() {
+        return materialDao.findAll();
+    }
+    public List<Material> getMaterialBySubjectId(String id){
+        return materialDao.getMaterialBySubjectId(id);
+    }
+    public Material getMaterialById(String id){
+        return materialDao.findById(id).orElse(null);
     }
 
     public Material updateMaterial(String id,Material material){

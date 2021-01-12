@@ -13,6 +13,8 @@ public class Student {
     @NotNull
     private String studentName;
     @NotNull
+    private String studentPassword;
+    @NotNull
     private String studentEmail;
     @NotNull
     private String studentGender;
@@ -31,7 +33,12 @@ public class Student {
 
     public Student(){}
 
-    public Student(@JsonProperty("studentId") String studentId,@JsonProperty("studentName") String studentName,
+    public Student(String studentId, String studentPassword) {
+        this.studentId = studentId;
+        this.studentPassword = studentPassword;
+    }
+
+    public Student(@JsonProperty("studentId") String studentId, @JsonProperty("studentName") String studentName,
                    @JsonProperty("studentEmail") String studentEmail, @JsonProperty("studentGender") String studentGender,
                    @JsonProperty("studentDob") String studentDob, @JsonProperty("studentPhone")String studentPhone,
                    @JsonProperty("studentAddress") String studentAddress, @JsonProperty("studentNumber")String studentNumber,
@@ -123,4 +130,12 @@ public class Student {
     public String getStudentBranch() { return studentBranch; }
 
     public void setStudentBranch(String studentBranch) { this.studentBranch = studentBranch; }
+
+    public String getStudentPassword() {
+        return studentPassword;
+    }
+
+    public void setStudentPassword(String studentPassword) {
+        this.studentPassword = studentPassword;
+    }
 }

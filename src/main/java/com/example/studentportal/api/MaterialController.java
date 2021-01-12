@@ -22,9 +22,18 @@ public class MaterialController {
         return materialService.addMaterial(material);
     }
 
+    @GetMapping
+    public List<Material> getAllMaterial(){
+        return materialService.getAllMaterial();
+    }
+
     @GetMapping(path = "{id}")
-    public List<Material> getMaterialBySubjectId(@PathVariable("id") String id){
+    public Material getMaterialById(@PathVariable("id") String id){
         return materialService.getMaterialById(id);
+    }
+    @GetMapping(path = "{subject}/{id}")
+    public List<Material> getMaterialBySubjectId(@PathVariable("id") String id){
+        return materialService.getMaterialBySubjectId(id);
     }
 
     @PutMapping(path = "{id}")
