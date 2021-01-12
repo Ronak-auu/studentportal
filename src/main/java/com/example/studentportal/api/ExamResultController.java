@@ -4,6 +4,7 @@ import com.example.studentportal.model.ExamResult;
 import com.example.studentportal.service.ExamResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -11,14 +12,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("exam")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("admin/exam")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ExamResultController {
 
     @Autowired
     private ExamResultService examResultService;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addResult(@Valid @NonNull @RequestBody ExamResult e){
         return examResultService.insertResult(e);
     }
@@ -36,7 +38,17 @@ public class ExamResultController {
         return examResultService.getResultByResultId(id);
     }
 
+    @GetMapping(path = "{id}")
+    public List<ExamResult> getResultByStudentId(@PathVariable("id") String id){
+        return examResultService.getResultByStudentId(id);
+    }
+    @GetMapping(path = "result/{id}")
+    public ExamResult getResultByResultId(@PathVariable("id") String id){
+        return examResultService.getResultByResultId(id);
+    }
+
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public int updateResultByIdAndType(@Valid @NonNull @RequestBody ExamResult e){
         return examResultService.updateResultByIdAndType(e);
     }

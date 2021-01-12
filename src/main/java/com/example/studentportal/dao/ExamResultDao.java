@@ -35,9 +35,9 @@ public interface ExamResultDao extends JpaRepository<ExamResult,String> {
             "e.examExternalMark = :emark,e.attendance = :attendance WHERE e.studentId = :studentid " +
             "AND e.subjectId = :subjectid AND e.examType = :type",nativeQuery = true)
     int updateResultByIdAndType(@Param("studentid") String studentid,@Param("subjectid") String subjectid,
-                                       @Param("type") String type, @Param("date") String date,
-                                       @Param("imark") String imark, @Param("emark") String emark,
-                                       @Param("attendance") String attendance);
+                                @Param("type") String type, @Param("date") String date,
+                                @Param("imark") String imark, @Param("emark") String emark,
+                                @Param("attendance") String attendance);
 
     @Modifying
     @Query("DELETE FROM ExamResult e where e.examId = :id")

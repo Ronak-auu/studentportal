@@ -3,6 +3,8 @@ package com.example.studentportal.model;
 import com.sun.istack.NotNull;
 import jdk.jfr.DataAmount;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.lang.model.element.Name;
 import javax.persistence.Entity;
@@ -20,6 +22,8 @@ public class Teacher {
     @NotNull
     private String teacherName;
     @NotNull
+    private String teacherPassword;
+    @NotNull
     private String teacherEmail;
     @NotNull
     private String teacherGender;
@@ -33,18 +37,21 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(String teacherId) {
+    public Teacher(String teacherId, String teacherPassword) {
         this.teacherId = teacherId;
+        this.teacherPassword = teacherPassword;
     }
 
-    public Teacher(String teacherId, String teacherName, String teacherEmail, String teacherGender, String teacherDob, String teacherPhone, String teacherAddress) {
+    public Teacher(String teacherId, String teacherName, String teacherPassword, String teacherEmail, String teacherGender, String teacherDob, String teacherPhone, String teacherAddress) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
+        this.teacherPassword = teacherPassword;
         this.teacherEmail = teacherEmail;
         this.teacherGender = teacherGender;
         this.teacherDob = teacherDob;
         this.teacherPhone = teacherPhone;
         this.teacherAddress = teacherAddress;
+
     }
 
     public String getTeacherId() {
@@ -101,5 +108,13 @@ public class Teacher {
 
     public void setTeacherAddress(String teacherAddress) {
         this.teacherAddress = teacherAddress;
+    }
+
+    public String getTeacherPassword() {
+        return teacherPassword;
+    }
+
+    public void setTeacherPassword(String teacherPassword) {
+        this.teacherPassword = teacherPassword;
     }
 }

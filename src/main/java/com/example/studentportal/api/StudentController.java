@@ -4,6 +4,8 @@ import com.example.studentportal.model.Student;
 import com.example.studentportal.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,14 +15,23 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("admin/student")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class StudentController {
 
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    public StudentController(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void addStudent(@NonNull @Valid @RequestBody Student s){
+        s.setStudentPassword(passwordEncoder.encode(s.getStudentDob()));
         studentService.insertStudent(s);
     }
 

@@ -3,6 +3,9 @@ package com.example.studentportal.service;
 import com.example.studentportal.model.Student;
 import com.example.studentportal.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,12 +15,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class StudentService {
-    private StudentDao studentDAO;
-
     @Autowired
-    public StudentService(StudentDao studentDAO){
-        this.studentDAO = studentDAO;
-    }
+    private StudentDao studentDAO;
 
     public List<Student> getAllStudents() {
         return studentDAO.findAll();

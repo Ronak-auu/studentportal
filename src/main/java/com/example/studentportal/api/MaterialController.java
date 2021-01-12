@@ -26,6 +26,7 @@ public class MaterialController {
     public List<Material> getAllMaterial(){
         return materialService.getAllMaterial();
     }
+
     @GetMapping(path = "{id}")
     public Material getMaterialById(@PathVariable("id") String id){
         return materialService.getMaterialById(id);
