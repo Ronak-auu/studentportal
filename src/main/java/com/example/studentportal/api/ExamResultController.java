@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("admin/exam")
+@RequestMapping("exam")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ExamResultController {
 
@@ -20,33 +20,37 @@ public class ExamResultController {
     private ExamResultService examResultService;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER')")
     public String addResult(@Valid @NonNull @RequestBody ExamResult e){
         return examResultService.insertResult(e);
     }
 
     @GetMapping(path = "{id}/{type}")
+    @PreAuthorize("hasRole('TEACHER')")
     public List<ExamResult> getResultByIdAndType(@PathVariable("id") String id, @PathVariable("type") String type){
         return examResultService.getResultByIdAndType(id,type);
     }
 
     @GetMapping(path = "{id}")
+    @PreAuthorize("hasRole('TEACHER')")
     public List<ExamResult> getResultByStudentId(@PathVariable("id") String id){
         return examResultService.getResultByStudentId(id);
     }
     @GetMapping(path = "result/{id}")
+    @PreAuthorize("hasRole('TEACHER')")
     public ExamResult getResultByResultId(@PathVariable("id") String id){
         return examResultService.getResultByResultId(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER')")
     public int updateResultByIdAndType(@Valid @NonNull @RequestBody ExamResult e){
         return examResultService.updateResultByIdAndType(e);
     }
 
     //Student Id
     @DeleteMapping(path = "{id}")
+    @PreAuthorize("hasRole('TEACHER')")
     public int deleteResultById(@PathVariable("id") String id){
         return examResultService.deleteResultById(id);
     }

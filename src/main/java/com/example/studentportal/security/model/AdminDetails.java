@@ -21,7 +21,7 @@ public class AdminDetails implements UserDetails {
 
     public static AdminDetails build(Admin admin){
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         return new AdminDetails(
                 admin.getAdminId(),

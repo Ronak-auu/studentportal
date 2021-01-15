@@ -28,28 +28,32 @@ public class StudentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void addStudent(@NonNull @Valid @RequestBody Student s){
         s.setStudentPassword(passwordEncoder.encode(s.getStudentDob()));
         studentService.insertStudent(s);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
     public List<Student> getAllStudent(){
         return studentService.getAllStudents();
     }
 
     @GetMapping(path = "{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
     public Optional<Student> getStudentById(@PathVariable("id") String id){
         return studentService.findStudentById(id);
     }
 
     @PutMapping(path = "{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateStudentById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Student s){
         studentService.updateStudentById(id,s);
     }
 
     @DeleteMapping(path = "{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteStudentById(@PathVariable("id") String id){
         studentService.deleteStudentById(id);
     }
