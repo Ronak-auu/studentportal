@@ -21,7 +21,7 @@ public class StudentDetails implements UserDetails {
 
     public static StudentDetails build(Student student){
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("STUDENT"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
 
         return new StudentDetails(
                 student.getStudentId(),
