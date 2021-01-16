@@ -38,15 +38,6 @@ public class ExamResultController {
         return examResultService.getResultByResultId(id);
     }
 
-    @GetMapping(path = "{id}")
-    public List<ExamResult> getResultByStudentId(@PathVariable("id") String id){
-        return examResultService.getResultByStudentId(id);
-    }
-    @GetMapping(path = "result/{id}")
-    public ExamResult getResultByResultId(@PathVariable("id") String id){
-        return examResultService.getResultByResultId(id);
-    }
-
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public int updateResultByIdAndType(@Valid @NonNull @RequestBody ExamResult e){
