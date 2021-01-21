@@ -27,13 +27,13 @@ public class SubjectController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER') or hasRole('STUDENT')")
     public List<Subject> getAllSubjects(){
         return subjectService.getAllSubjects();
     }
 
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public Subject getSubjectById(@PathVariable("id") String id){
         return subjectService.getSubjectById(id);
     }

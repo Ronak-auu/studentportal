@@ -36,7 +36,7 @@ public class MaterialController {
         return materialService.getMaterialById(id);
     }
     @GetMapping(path = "{subject}/{id}")
-    @PreAuthorize("hasRole('TEACHER')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
     public List<Material> getMaterialBySubjectId(@PathVariable("id") String id){
         return materialService.getMaterialBySubjectId(id);
     }

@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER') or hasRole('STUDENT')")
     public Optional<Student> getStudentById(@PathVariable("id") String id){
         return studentService.findStudentById(id);
     }
