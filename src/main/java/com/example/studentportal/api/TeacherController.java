@@ -41,7 +41,7 @@ public class TeacherController {
     }
 
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
     public Teacher findTeacherByID(@PathVariable("id") String id){
         return teacherService.getTeacherById(id);
     }
