@@ -31,7 +31,7 @@ public class ExamResultController {
         return examResultService.getResultByIdAndType(id,type);
     }
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasRole('TEACHER')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
     public List<ExamResult> getResultByStudentId(@PathVariable("id") String id){
         return examResultService.getResultByStudentId(id);
     }
