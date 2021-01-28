@@ -18,5 +18,8 @@ public interface MaterialDao extends JpaRepository<Material,String> {
 
     @Modifying
     @Query("DELETE FROM Material e where e.subjectId = :id")
-    void deleteBySubjectId(@Param("id") String id);
+    int deleteBySubjectId(@Param("id") String id);
+
+    Boolean existsByMaterialId(String materialId);
+
 }

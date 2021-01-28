@@ -3,9 +3,6 @@ package com.example.studentportal.service;
 import com.example.studentportal.model.Student;
 import com.example.studentportal.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,15 +19,20 @@ public class StudentService {
         return studentDAO.findAll();
     }
 
-    public void insertStudent(Student student) {
-        studentDAO.save(student);
+    public int insertStudent(Student student) {
+        if (studentDAO.existsByStudentId(student.getStudentId()) == null) {
+            studentDAO.save(student);
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public Optional<Student> findStudentById(String id) {
         return studentDAO.findById(id);
     }
 
-    public void updateStudentById(String id,Student student) {
+    public int updateStudentById(String id,Student student) {
         studentDAO.findById(id).map(s -> {
             s.setStudentName(student.getStudentName());
             s.setStudentAddress(student.getStudentAddress());
@@ -41,14 +43,17 @@ public class StudentService {
             s.setStudentPhone(student.getStudentPhone());
             s.setStudentNumber(student.getStudentNumber());
             s.setStudentBranch(student.getStudentBranch());
-            return studentDAO.save(s);
-        }).orElseGet(() ->{
-            student.setStudentId(id);
-            return studentDAO.save(student);
+            studentDAO.save(s);
+            return 1;
         });
+        return 0;
     }
 
-    public void deleteStudentById(String id){
-        studentDAO.deleteById(id);
+    public int deleteStudentById(String id){
+        if(studentDAO.existsByStudentId(id)!=null) {
+            studentDAO.deleteById(id);
+            return 1;
+        }
+        return 0;
     }
 }

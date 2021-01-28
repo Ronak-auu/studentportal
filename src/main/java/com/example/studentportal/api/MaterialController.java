@@ -43,18 +43,19 @@ public class MaterialController {
 
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('TEACHER')")
-    public Material updateMaterial(@PathVariable("id") String id,@Valid @NonNull @RequestBody Material material){
+    public int updateMaterial(@PathVariable("id") String id,@Valid @NonNull @RequestBody Material material){
         return materialService.updateMaterial(id,material);
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('TEACHER')")
-    public String deleteMaterial(@PathVariable("id") String id){
+    public int deleteMaterial(@PathVariable("id") String id){
         return materialService.deleteMaterial(id);
     }
+
     @DeleteMapping(path = "{subject}/{id}")
     @PreAuthorize("hasRole('TEACHER')")
-    public String deleteMaterialsBySubjectId(@PathVariable("id") String id){
+    public int deleteMaterialsBySubjectId(@PathVariable("id") String id){
         return materialService.deleteMaterialsBySubjectId(id);
     }
 

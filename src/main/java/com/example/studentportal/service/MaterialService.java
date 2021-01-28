@@ -32,28 +32,34 @@ public class MaterialService {
         return materialDao.findById(id).orElse(null);
     }
 
-    public Material updateMaterial(String id,Material material){
+    public int updateMaterial(String id,Material material){
         Material existingMaterial = materialDao.findById(id).orElse(null);
         existingMaterial.setMaterialLink(material.getMaterialLink());
         existingMaterial.setMaterialDescription(material.getMaterialDescription());
         existingMaterial.setSubjectId(material.getSubjectId());
         if (materialDao.checkSubjectExists(material.getSubjectId()) != null) {
-            return materialDao.save(existingMaterial);
+            materialDao.save(existingMaterial);
+            return 1;
         } else {
-            return null;
+            return 0;
             // Subject exists
         }
 
     }
 
-    public String deleteMaterial(String id){
-        materialDao.deleteById(id);
-        return "Material Removed  !" + id ;
+    public int deleteMaterial(String id){
+        if(materialDao.existsByMaterialId(id)!=null) {
+            materialDao.deleteById(id);
+            return 1;
+        }
+        return 0;
     }
 
-    public String deleteMaterialsBySubjectId(String id){
-        materialDao.deleteBySubjectId(id);
-        return "Materials Removed !";
+    public int deleteMaterialsBySubjectId(String id){
+        if(materialDao.existsByMaterialId(id)!=null) {
+            return materialDao.deleteBySubjectId(id);
+        }
+        return 0;
     }
 
 

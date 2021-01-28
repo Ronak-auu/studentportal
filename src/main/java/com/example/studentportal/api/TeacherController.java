@@ -29,7 +29,7 @@ public class TeacherController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Teacher addTeacher(@NonNull @Valid @RequestBody Teacher teacher){
+    public int addTeacher(@NonNull @Valid @RequestBody Teacher teacher){
         teacher.setTeacherPassword(passwordEncoder.encode(teacher.getTeacherDob()));
         return teacherService.saveTeacher(teacher);
     }
@@ -48,13 +48,13 @@ public class TeacherController {
 
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Teacher updateTeacher(@PathVariable("id") String id,@NonNull @Valid @RequestBody Teacher teacher){
+    public int updateTeacher(@PathVariable("id") String id,@NonNull @Valid @RequestBody Teacher teacher){
         return teacherService.updateTeacher(id,teacher);
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String deleteTeacher(@PathVariable("id") String id){
+    public int deleteTeacher(@PathVariable("id") String id){
         return teacherService.deleteTeacher(id);
     }
 }

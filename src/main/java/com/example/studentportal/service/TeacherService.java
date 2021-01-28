@@ -13,8 +13,12 @@ public class TeacherService {
     @Autowired
     private TeacherDao teacherDao;
 
-    public Teacher saveTeacher(Teacher teacher){
-       return teacherDao.save(teacher);
+    public int saveTeacher(Teacher teacher){
+       if(teacherDao.existsByTeacherId(teacher.getTeacherId())==null) {
+           teacherDao.save(teacher);
+           return 1;
+       }
+       return 0;
     };
 
     public List<Teacher> getTeachers(){
@@ -27,20 +31,26 @@ public class TeacherService {
         return teacherDao.findByName(name);
     }*/
 
-    public String deleteTeacher(String id){
-        teacherDao.deleteById(id);
-        return "Teacher Removed  !" + id ;
+    public int deleteTeacher(String id){
+        if(teacherDao.existsByTeacherId(id) != null) {
+            teacherDao.deleteById(id);
+            return 1;
+        }
+        return 0;
     };
 
-    public Teacher updateTeacher(String id,Teacher teacher){
-        Teacher existingTeacher = teacherDao.findById(id).orElse(null);
-        existingTeacher.setTeacherEmail(teacher.getTeacherEmail());
-        existingTeacher.setTeacherName(teacher.getTeacherName());
-        existingTeacher.setTeacherGender(teacher.getTeacherGender());
-        existingTeacher.setTeacherDob(teacher.getTeacherDob());
-        existingTeacher.setTeacherPhone(teacher.getTeacherPhone());
-        existingTeacher.setTeacherAddress(teacher.getTeacherAddress());
-        return teacherDao.save(existingTeacher);
+    public int updateTeacher(String id,Teacher teacher){
+        teacherDao.findById(id).map(existingTeacher -> {
+            existingTeacher.setTeacherEmail(teacher.getTeacherEmail());
+            existingTeacher.setTeacherName(teacher.getTeacherName());
+            existingTeacher.setTeacherGender(teacher.getTeacherGender());
+            existingTeacher.setTeacherDob(teacher.getTeacherDob());
+            existingTeacher.setTeacherPhone(teacher.getTeacherPhone());
+            existingTeacher.setTeacherAddress(teacher.getTeacherAddress());
+            teacherDao.save(existingTeacher);
+            return 1;
+        });
+        return 0;
 
     }
 }

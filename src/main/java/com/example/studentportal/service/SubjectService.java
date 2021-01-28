@@ -13,8 +13,12 @@ public class SubjectService {
     @Autowired
     private SubjectDao subjectDao;
 
-    public Subject saveSubject(Subject subject){
-        return subjectDao.save(subject);
+    public int saveSubject(Subject subject){
+        if(subjectDao.existsBySubjectId(subject.getSubjectId())==null){
+            subjectDao.save(subject);
+            return 1;
+        }
+        return 0;
     };
 
     public List<Subject> getAllSubjects(){
@@ -25,18 +29,24 @@ public class SubjectService {
     }
 
 
-    public String deleteSubject(String id){
-        subjectDao.deleteById(id);
-        return "Subject Removed ! " + id ;
+    public int deleteSubject(String id){
+        if(subjectDao.existsBySubjectId(id)!=null) {
+            subjectDao.deleteById(id);
+            return 1;
+        }
+        return 0;
     };
 
-    public Subject updateSubject(String id,Subject subject){
-        Subject existingSubject = subjectDao.findById(id).orElse(null);
-        existingSubject.setSubjectName(subject.getSubjectName());
-        existingSubject.setSubjectCredit(subject.getSubjectCredit());
-        existingSubject.setSubjectBranch(subject.getSubjectBranch());
-        existingSubject.setSubjectSemester(subject.getSubjectSemester());
-        return subjectDao.save(existingSubject);
+    public int updateSubject(String id,Subject subject){
+        subjectDao.findById(id).map((existingSubject)-> {
+            existingSubject.setSubjectName(subject.getSubjectName());
+            existingSubject.setSubjectCredit(subject.getSubjectCredit());
+            existingSubject.setSubjectBranch(subject.getSubjectBranch());
+            existingSubject.setSubjectSemester(subject.getSubjectSemester());
+            subjectDao.save(existingSubject);
+            return 1;
+        });
+        return 0;
 
     }
 }

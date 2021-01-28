@@ -47,7 +47,6 @@ public class ExamResultController {
         return examResultService.updateResultByIdAndType(e);
     }
 
-    //Result Id
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('TEACHER')")
     public int deleteResultById(@PathVariable("id") String id){

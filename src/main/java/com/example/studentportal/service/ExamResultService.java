@@ -20,13 +20,13 @@ public class ExamResultService {
 
     public String insertResult(ExamResult examResult) {
         if(examResultDao.checkResultExist(examResult.getStudentId(),examResult.getSubjectId(),examResult.getExamType())!=null){
-            return "exists";
+            return "Exists";
         }
         else {
             if(examResultDao.checkStudentExist(examResult.getStudentId())!=null
                     && examResultDao.checkSubjectExist(examResult.getSubjectId())!=null){
                 examResultDao.save(examResult);
-                return "added";
+                return "Added";
             }
             else {
                 return "Student or Subject not exists";

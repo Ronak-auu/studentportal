@@ -22,8 +22,8 @@ public class SubjectController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public void addSubject(@NonNull @Valid @RequestBody Subject subject){
-        subjectService.saveSubject(subject);
+    public int addSubject(@NonNull @Valid @RequestBody Subject subject){
+       return subjectService.saveSubject(subject);
     }
 
     @GetMapping
@@ -40,13 +40,13 @@ public class SubjectController {
 
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateSubjectById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Subject subject){
-        subjectService.updateSubject(id,subject);
+    public int updateSubjectById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Subject subject){
+        return subjectService.updateSubject(id,subject);
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteSubjectById(@PathVariable("id") String id){
-        subjectService.deleteSubject(id);
+    public int deleteSubjectById(@PathVariable("id") String id){
+        return subjectService.deleteSubject(id);
     }
 }

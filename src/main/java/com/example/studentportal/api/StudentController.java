@@ -30,9 +30,9 @@ public class StudentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public void addStudent(@NonNull @Valid @RequestBody Student s){
+    public int addStudent(@NonNull @Valid @RequestBody Student s){
         s.setStudentPassword(passwordEncoder.encode(s.getStudentDob()));
-        studentService.insertStudent(s);
+        return studentService.insertStudent(s);
     }
 
     @GetMapping
@@ -49,13 +49,13 @@ public class StudentController {
 
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateStudentById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Student s){
-        studentService.updateStudentById(id,s);
+    public int updateStudentById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Student s){
+        return studentService.updateStudentById(id,s);
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteStudentById(@PathVariable("id") String id){
-        studentService.deleteStudentById(id);
+    public int deleteStudentById(@PathVariable("id") String id){
+        return studentService.deleteStudentById(id);
     }
 }
