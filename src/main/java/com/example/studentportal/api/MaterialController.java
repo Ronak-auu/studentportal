@@ -20,7 +20,7 @@ public class MaterialController {
 
     @PostMapping
     @PreAuthorize("hasRole('TEACHER')")
-    public String addMaterial(@Valid @NonNull @RequestBody Material material) {
+    public int addMaterial(@Valid @NonNull @RequestBody Material material) {
         return materialService.addMaterial(material);
     }
 

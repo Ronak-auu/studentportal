@@ -20,7 +20,7 @@ public class StudentService {
     }
 
     public int insertStudent(Student student) {
-        if (studentDAO.existsByStudentId(student.getStudentId()) == null) {
+        if (!studentDAO.existsByStudentId(student.getStudentId())) {
             studentDAO.save(student);
             return 1;
         } else {
@@ -50,7 +50,7 @@ public class StudentService {
     }
 
     public int deleteStudentById(String id){
-        if(studentDAO.existsByStudentId(id)!=null) {
+        if(studentDAO.existsByStudentId(id)) {
             studentDAO.deleteById(id);
             return 1;
         }

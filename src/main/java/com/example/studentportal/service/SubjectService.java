@@ -14,7 +14,7 @@ public class SubjectService {
     private SubjectDao subjectDao;
 
     public int saveSubject(Subject subject){
-        if(subjectDao.existsBySubjectId(subject.getSubjectId())==null){
+        if(!subjectDao.existsBySubjectId(subject.getSubjectId())){
             subjectDao.save(subject);
             return 1;
         }
@@ -30,7 +30,7 @@ public class SubjectService {
 
 
     public int deleteSubject(String id){
-        if(subjectDao.existsBySubjectId(id)!=null) {
+        if(subjectDao.existsBySubjectId(id)) {
             subjectDao.deleteById(id);
             return 1;
         }

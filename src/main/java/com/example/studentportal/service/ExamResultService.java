@@ -47,13 +47,21 @@ public class ExamResultService {
     }
 
     public int updateResultByIdAndType(ExamResult examResult){
-        return examResultDao.updateResultByIdAndType(examResult.getStudentId(),examResult.getSubjectId(),
-                examResult.getExamType(),examResult.getExamDate(),examResult.getExamInternalMark(),
-                examResult.getExamExternalMark(),examResult.getAttendance());
+        if(examResultDao.checkResultExist(examResult.getStudentId(),examResult.getSubjectId(),examResult.getExamType())!=null){
+            examResultDao.updateResultByIdAndType(examResult.getStudentId(),examResult.getSubjectId(),
+                    examResult.getExamType(),examResult.getExamDate(),examResult.getExamInternalMark(),
+                    examResult.getExamExternalMark(),examResult.getAttendance());
+            return 1;
+        }
+        return 0;
+
     }
 
     public int deleteResultById(String id){
-        return examResultDao.deleteResultById(id);
+        if(examResultDao.existsByExamId(id)) {
+            return examResultDao.deleteResultById(id);
+        }
+        return 0;
     }
 
 

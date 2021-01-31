@@ -14,7 +14,7 @@ public class TeacherService {
     private TeacherDao teacherDao;
 
     public int saveTeacher(Teacher teacher){
-       if(teacherDao.existsByTeacherId(teacher.getTeacherId())==null) {
+       if(!teacherDao.existsByTeacherId(teacher.getTeacherId())) {
            teacherDao.save(teacher);
            return 1;
        }
@@ -32,7 +32,7 @@ public class TeacherService {
     }*/
 
     public int deleteTeacher(String id){
-        if(teacherDao.existsByTeacherId(id) != null) {
+        if(teacherDao.existsByTeacherId(id)) {
             teacherDao.deleteById(id);
             return 1;
         }

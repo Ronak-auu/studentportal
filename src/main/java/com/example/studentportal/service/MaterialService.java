@@ -14,12 +14,12 @@ public class MaterialService {
     @Autowired
     private MaterialDao materialDao;
 
-    public String addMaterial(Material material) {
+    public int addMaterial(Material material) {
         if (materialDao.checkSubjectExists(material.getSubjectId()) != null) {
             materialDao.save(material);
-            return "Added";
+            return 1;
         } else {
-            return "Subject not exists";
+            return 0;
         }
     }
     public List<Material> getAllMaterial() {
@@ -48,7 +48,7 @@ public class MaterialService {
     }
 
     public int deleteMaterial(String id){
-        if(materialDao.existsByMaterialId(id)!=null) {
+        if(materialDao.existsByMaterialId(id)) {
             materialDao.deleteById(id);
             return 1;
         }
@@ -56,7 +56,7 @@ public class MaterialService {
     }
 
     public int deleteMaterialsBySubjectId(String id){
-        if(materialDao.existsByMaterialId(id)!=null) {
+        if(materialDao.checkSubjectExists(id)!=null) {
             return materialDao.deleteBySubjectId(id);
         }
         return 0;

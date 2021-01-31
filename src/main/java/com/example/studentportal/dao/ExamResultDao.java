@@ -42,4 +42,6 @@ public interface ExamResultDao extends JpaRepository<ExamResult,String> {
     @Modifying
     @Query("DELETE FROM ExamResult e where e.examId = :id")
     int deleteResultById(@Param("id") String id);
+
+    Boolean existsByExamId(String examId);
 }
