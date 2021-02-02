@@ -47,6 +47,7 @@ public class TeacherService {
             existingTeacher.setTeacherDob(teacher.getTeacherDob());
             existingTeacher.setTeacherPhone(teacher.getTeacherPhone());
             existingTeacher.setTeacherAddress(teacher.getTeacherAddress());
+            existingTeacher.setTeacherPassword(teacher.getTeacherPassword());
             teacherDao.save(existingTeacher);
             return 1;
         });

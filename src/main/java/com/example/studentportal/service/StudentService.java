@@ -37,6 +37,7 @@ public class StudentService {
             s.setStudentName(student.getStudentName());
             s.setStudentAddress(student.getStudentAddress());
             s.setStudentClass(student.getStudentClass());
+            s.setStudentPassword(student.getStudentPassword());
             s.setStudentDob(student.getStudentDob());
             s.setStudentEmail(student.getStudentEmail());
             s.setStudentGender(student.getStudentGender());
