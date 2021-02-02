@@ -49,6 +49,7 @@ public class TeacherController {
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public int updateTeacher(@PathVariable("id") String id,@NonNull @Valid @RequestBody Teacher teacher){
+        teacher.setTeacherPassword(passwordEncoder.encode(teacher.getTeacherDob()));
         return teacherService.updateTeacher(id,teacher);
     }
 

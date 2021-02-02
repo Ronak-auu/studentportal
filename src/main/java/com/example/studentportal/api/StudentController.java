@@ -50,6 +50,7 @@ public class StudentController {
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public int updateStudentById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Student s){
+        s.setStudentPassword(passwordEncoder.encode(s.getStudentDob()));
         return studentService.updateStudentById(id,s);
     }
 
