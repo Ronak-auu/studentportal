@@ -20,10 +20,6 @@ public class Report {
     @NotNull
     private String studentId;
     @NotNull
-    private String externalId;
-    @NotNull
-    private String internalId;
-    @NotNull
     private String reportNo;
     @NotNull
     private String reportLink;
