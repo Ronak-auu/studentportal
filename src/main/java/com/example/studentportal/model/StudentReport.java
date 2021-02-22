@@ -13,11 +13,6 @@ import javax.validation.constraints.Size;
 @Table(name="studentreport")
 public class StudentReport {
     @Id @NotNull
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Size(max = 500)
-    private String srId;
-    @NotNull
     private String studentId;
     @NotNull
     private String externalId;
@@ -39,8 +34,7 @@ public class StudentReport {
     public StudentReport() {
     }
 
-    public StudentReport(@Size(max = 500) String srId, String studentId, String externalId, String internalId, String projectDefinition, String workLanguage, String studentPercentage, String companyResources, String joinDate, String endDate) {
-        this.srId = srId;
+    public StudentReport( String studentId, String externalId, String internalId, String projectDefinition, String workLanguage, String studentPercentage, String companyResources, String joinDate, String endDate) {
         this.studentId = studentId;
         this.externalId = externalId;
         this.internalId = internalId;
@@ -50,14 +44,6 @@ public class StudentReport {
         this.companyResources = companyResources;
         this.joinDate = joinDate;
         this.endDate = endDate;
-    }
-
-    public String getSrId() {
-        return srId;
-    }
-
-    public void setSrId(String srId) {
-        this.srId = srId;
     }
 
     public String getStudentId() {

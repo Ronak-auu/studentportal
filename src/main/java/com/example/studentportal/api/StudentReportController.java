@@ -32,17 +32,7 @@ public class StudentReportController {
         return studentReportService.getStudentByGuideId(eid,iid);
     }
 
-    @GetMapping(path = "{iid}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<Teacher> getInternalGuidebyId( @PathVariable("iid") String iid){
-        return studentReportService.getInternalGuideById(iid);
-    }
 
-    @GetMapping(path = "{eid}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<Teacher> getExternalGuidebyId( @PathVariable("eid") String eid){
-        return studentReportService.getExternalGuideById(eid);
-    }
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -51,7 +41,7 @@ public class StudentReportController {
     }
 
     @DeleteMapping(path = "{id}")
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public int deleteStudentReportById(@PathVariable("id") String id){
         return studentReportService.deleteStudentReportById(id);
     }

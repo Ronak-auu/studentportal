@@ -15,13 +15,10 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
     List<StudentReport> getStudentByGuideId(@Param("eid") String eid,@Param("iid") String iid);
 
     @Query(value = "SELECT * FROM Teacher t WHERE t.teacherId = :teacherid",nativeQuery = true)
-    List<Teacher> getExternalTeacher(@Param("teacherid") String teacherid);
-
-    @Query(value = "SELECT * FROM Teacher t WHERE t.teacherId = :teacherid",nativeQuery = true)
-    List<Teacher> getInternalTeacher(@Param("teacherid") String teacherid);
+    List<Teacher> getTeacher(@Param("teacherid") String teacherid);
 
     @Query(value = "SELECT * FROM StudentReport sr WHERE sr.studentId = :sid AND sr.externalId = :eid" +
-            "AND sr.internalId = :iid",
+            " AND sr.internalId = :iid",
             nativeQuery = true)
     String checkStudentReportExist(@Param("sid") String studentid,@Param("eid")String externalid,@Param("iid") String internalid);
 
@@ -36,7 +33,7 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
 
     @Modifying
     @Query(value = "UPDATE StudentReport sr SET sr.projectDefinition = :projectdefinition, sr.workLanguage = :worklanguage," +
-            "sr.studentPercentage = :studentpercentage,sr.companyResources = :companyresources, sr.joinDate = :joindate " +
+            "sr.studentPercentage = :studentpercentage,sr.companyResources = :companyresources, sr.joinDate = :joindate, " +
             "sr.endDate = :enddate WHERE sr.studentId = :studentid " +
             "AND sr.internalId = :internalid AND sr.externalId = :externalid",nativeQuery = true)
     int updateStudentReport(@Param("studentid") String studentid,@Param("internalid") String internalid,
@@ -46,9 +43,8 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
                                 @Param("enddate") String enddate);
 
     @Modifying
-    @Query("DELETE FROM StudentReport sr where sr.srId = :id")
+    @Query("DELETE FROM StudentReport sr where sr.studentId = :id")
     int deleteStudentReportById(@Param("id") String id);
 
-    Boolean existsByStudentReportId(String materialId);
 
 }
