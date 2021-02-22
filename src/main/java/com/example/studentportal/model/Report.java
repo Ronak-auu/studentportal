@@ -20,10 +20,6 @@ public class Report {
     @NotNull
     private String studentId;
     @NotNull
-    private String externalId;
-    @NotNull
-    private String internalId;
-    @NotNull
     private String reportNo;
     @NotNull
     private String reportLink;
@@ -33,4 +29,77 @@ public class Report {
     private String externalStatus;
     @NotNull
     private String internalStatus;
+
+    public Report() {
+    }
+
+    public Report(@Size(max = 500) String rId, String studentId, String reportNo, String reportLink, String reportDate, String externalStatus, String internalStatus) {
+        this.rId = rId;
+        this.studentId = studentId;
+        this.reportNo = reportNo;
+        this.reportLink = reportLink;
+        this.reportDate = reportDate;
+        this.externalStatus = externalStatus;
+        this.internalStatus = internalStatus;
+    }
+
+    public Report(@Size(max = 500) String rId) {
+        this.rId = rId;
+    }
+
+    public String getrId() {
+        return rId;
+    }
+
+    public void setrId(String rId) {
+        this.rId = rId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getReportNo() {
+        return reportNo;
+    }
+
+    public void setReportNo(String reportNo) {
+        this.reportNo = reportNo;
+    }
+
+    public String getReportLink() {
+        return reportLink;
+    }
+
+    public void setReportLink(String reportLink) {
+        this.reportLink = reportLink;
+    }
+
+    public String getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(String reportDate) {
+        this.reportDate = reportDate;
+    }
+
+    public String getExternalStatus() {
+        return externalStatus;
+    }
+
+    public void setExternalStatus(String externalStatus) {
+        this.externalStatus = externalStatus;
+    }
+
+    public String getInternalStatus() {
+        return internalStatus;
+    }
+
+    public void setInternalStatus(String internalStatus) {
+        this.internalStatus = internalStatus;
+    }
 }
