@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="examresult")
 public class ExamResult {
     @Id @NotNull
     @GeneratedValue(generator = "uuid")

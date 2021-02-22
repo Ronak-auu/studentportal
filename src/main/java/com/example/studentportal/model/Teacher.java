@@ -33,6 +33,10 @@ public class Teacher {
     private String teacherPhone;
     @NotNull
     private String teacherAddress;
+    @NotNull
+    private String teacherRole;
+    @NotNull
+    private String teacherWorkplace;
 
     public Teacher() {
     }
@@ -42,7 +46,7 @@ public class Teacher {
         this.teacherPassword = teacherPassword;
     }
 
-    public Teacher(String teacherId, String teacherName, String teacherPassword, String teacherEmail, String teacherGender, String teacherDob, String teacherPhone, String teacherAddress) {
+    public Teacher(String teacherId, String teacherName, String teacherPassword, String teacherEmail, String teacherGender, String teacherDob, String teacherPhone, String teacherAddress, String teacherRole, String teacherWorkplace) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.teacherPassword = teacherPassword;
@@ -51,7 +55,8 @@ public class Teacher {
         this.teacherDob = teacherDob;
         this.teacherPhone = teacherPhone;
         this.teacherAddress = teacherAddress;
-
+        this.teacherRole = teacherRole;
+        this.teacherWorkplace = teacherWorkplace;
     }
 
     public String getTeacherId() {
@@ -116,5 +121,21 @@ public class Teacher {
 
     public void setTeacherPassword(String teacherPassword) {
         this.teacherPassword = teacherPassword;
+    }
+
+    public String getTeacherRole() {
+        return teacherRole;
+    }
+
+    public void setTeacherRole(String teacherRole) {
+        this.teacherRole = teacherRole;
+    }
+
+    public String getTeacherWorkplace() {
+        return teacherWorkplace;
+    }
+
+    public void setTeacherWorkplace(String teacherWorkplace) {
+        this.teacherWorkplace = teacherWorkplace;
     }
 }

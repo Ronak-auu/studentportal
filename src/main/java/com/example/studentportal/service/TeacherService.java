@@ -48,6 +48,8 @@ public class TeacherService {
             existingTeacher.setTeacherPhone(teacher.getTeacherPhone());
             existingTeacher.setTeacherAddress(teacher.getTeacherAddress());
             existingTeacher.setTeacherPassword(teacher.getTeacherPassword());
+            existingTeacher.setTeacherRole(teacher.getTeacherRole());
+            existingTeacher.setTeacherWorkplace(teacher.getTeacherWorkplace());
             teacherDao.save(existingTeacher);
             return 1;
         });
