@@ -40,6 +40,7 @@ public class MyUserDetailsService implements UserDetailsService {
                         orElseThrow(() -> new UsernameNotFoundException("Student not found with name : " + userId));
                 return StudentDetails.build(s);
             case "T":
+            case "E":
                 Teacher t = teacherDao.findByTeacherId(userId)
                         .orElseThrow(() -> new UsernameNotFoundException("Teacher not found with name : " + userId));
                 return TeacherDetails.build(t);

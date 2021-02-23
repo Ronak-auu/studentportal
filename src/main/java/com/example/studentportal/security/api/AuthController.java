@@ -70,7 +70,8 @@ public class AuthController {
                         studentDetails.getPassword(),
                         roles));
             }
-            case "T": {
+            case "T":
+            case "E": {
                 TeacherDetails teacherDetails = (TeacherDetails) authentication.getPrincipal();
 
                 List<String> roles = teacherDetails.getAuthorities().stream()
