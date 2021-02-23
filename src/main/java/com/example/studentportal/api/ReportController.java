@@ -24,9 +24,9 @@ public class ReportController {
 
     @PostMapping
     @PreAuthorize("hasRole('STUDENT')")
-    public int addReport(@ModelAttribute(value = "file") MultipartFile file,@ModelAttribute(value = "report") Report r){
+    public int addReport(@ModelAttribute(value = "file") MultipartFile file,@ModelAttribute Report r){
         try {
-            System.out.println(r.getReportDate());
+            System.out.println(r);
             return reportService.addReport(file,r);
         } catch (IOException e) {
             e.printStackTrace();
