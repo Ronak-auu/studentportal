@@ -4,8 +4,12 @@ import com.example.studentportal.dao.ReportDao;
 import com.example.studentportal.model.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -14,8 +18,12 @@ public class ReportService {
     @Autowired
     ReportDao reportDao;
 
-    public int addReport(Report r) {
-        reportDao.save(r);
+    public int addReport(MultipartFile file,Report r) throws IOException {
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        Report rt = new Report(r.getrId(),r.getStudentId(),r.getReportNo(),
+                file.getBytes(),fileName, file.getContentType(),r.getReportDate(),
+                r.getExternalStatus(),r.getInternalStatus());
+        reportDao.save(rt);
         return 1;
     }
 
@@ -25,20 +33,6 @@ public class ReportService {
 
     public List<Report> findReportByStudentId(String id) {
         return reportDao.findReportByStudentId(id);
-    }
-
-    public int updateReportById(String id, Report r) {
-
-        reportDao.findById(id).map(existingReport -> {
-            existingReport.setReportNo(r.getReportNo());
-            existingReport.setReportDate(r.getReportDate());
-            existingReport.setReportLink(r.getReportLink());
-            existingReport.setExternalStatus(r.getExternalStatus());
-            existingReport.setInternalStatus(r.getInternalStatus());
-            reportDao.save(existingReport);
-            return 1;
-        });
-        return 1;
     }
 
     public int deleteReportById(String id) {

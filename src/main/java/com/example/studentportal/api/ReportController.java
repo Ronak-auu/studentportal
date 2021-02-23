@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +24,14 @@ public class ReportController {
 
     @PostMapping
     @PreAuthorize("hasRole('STUDENT')")
-    public int addReport(@NonNull @Valid @RequestBody Report r){
-        return reportService.addReport(r);
+    public int addReport(@ModelAttribute(value = "file") MultipartFile file,@ModelAttribute(value = "report") Report r){
+        try {
+            System.out.println(r.getReportDate());
+            return reportService.addReport(file,r);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @GetMapping(path = "{id}")
@@ -38,11 +46,6 @@ public class ReportController {
         return reportService.findReportByStudentId(id);
     }
 
-    @PutMapping(path = "{id}")
-    @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
-    public int updateReportById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Report r){
-        return reportService.updateReportById(id,r);
-    }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('STUDENT')")

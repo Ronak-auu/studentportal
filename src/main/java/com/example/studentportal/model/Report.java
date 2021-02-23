@@ -3,10 +3,7 @@ package com.example.studentportal.model;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -21,8 +18,12 @@ public class Report {
     private String studentId;
     @NotNull
     private String reportNo;
+    @NotNull @Lob
+    private byte[] reportData;
     @NotNull
-    private String reportLink;
+    private String reportName;
+    @NotNull
+    private String reportType;
     @NotNull
     private String reportDate;
     @NotNull
@@ -33,18 +34,24 @@ public class Report {
     public Report() {
     }
 
-    public Report(@Size(max = 500) String rId, String studentId, String reportNo, String reportLink, String reportDate, String externalStatus, String internalStatus) {
+    public Report(@Size(max = 500) String rId, String studentId, String reportNo, byte[] reportData, String reportName, String reportType, String reportDate, String externalStatus, String internalStatus) {
         this.rId = rId;
         this.studentId = studentId;
         this.reportNo = reportNo;
-        this.reportLink = reportLink;
+        this.reportData = reportData;
+        this.reportName = reportName;
+        this.reportType = reportType;
         this.reportDate = reportDate;
         this.externalStatus = externalStatus;
         this.internalStatus = internalStatus;
     }
 
-    public Report(@Size(max = 500) String rId) {
-        this.rId = rId;
+    public Report(String studentId, String reportNo, String reportDate, String externalStatus, String internalStatus) {
+        this.studentId = studentId;
+        this.reportNo = reportNo;
+        this.reportDate = reportDate;
+        this.externalStatus = externalStatus;
+        this.internalStatus = internalStatus;
     }
 
     public String getrId() {
@@ -71,12 +78,28 @@ public class Report {
         this.reportNo = reportNo;
     }
 
-    public String getReportLink() {
-        return reportLink;
+    public byte[] getReportData() {
+        return reportData;
     }
 
-    public void setReportLink(String reportLink) {
-        this.reportLink = reportLink;
+    public void setReportData(byte[] reportData) {
+        this.reportData = reportData;
+    }
+
+    public String getReportName() {
+        return reportName;
+    }
+
+    public void setReportName(String reportName) {
+        this.reportName = reportName;
+    }
+
+    public String getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public String getReportDate() {
