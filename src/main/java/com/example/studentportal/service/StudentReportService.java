@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,8 +28,8 @@ public class StudentReportService {
         return studentReportDao.getStudentByGuideId(eid,iid);
     }
 
-    public List<StudentReport> getStudentById(String id){
-        return studentReportDao.getStudentById(id);
+    public Optional<StudentReport> getStudentById(String id){
+        return studentReportDao.findById(id);
     }
 
     public List<Teacher> getGuideById(String id){
@@ -39,7 +40,7 @@ public class StudentReportService {
             studentReportDao.updateStudentReport(studentReport.getStudentId(),studentReport.getInternalId(),
                     studentReport.getExternalId(),studentReport.getProjectDefinition(),studentReport.getWorkLanguage(),
                     studentReport.getStudentPercentage(),studentReport.getCompanyResources(),studentReport.getJoinDate(),
-                    studentReport.getEndDate());
+                    studentReport.getEndDate());    
             return 1;
 
 
@@ -47,5 +48,9 @@ public class StudentReportService {
 
     public int deleteStudentReportById(String id){
             return studentReportDao.deleteStudentReportById(id);
+    }
+
+    public List<StudentReport> getallReport() {
+        return studentReportDao.findAll();
     }
 }
