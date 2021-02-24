@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,7 +27,7 @@ public class StudentReportService {
         return studentReportDao.getStudentByGuideId(eid,iid);
     }
 
-    public Optional<StudentReport> getStudentById(String id){
+    public List<StudentReport> getStudentById(String id){
         return studentReportDao.getStudentById(id);
     }
 

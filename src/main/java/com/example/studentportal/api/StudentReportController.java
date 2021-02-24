@@ -39,6 +39,12 @@ public class StudentReportController {
         return studentReportService.getStudentById(id);
     }
 
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+    public List<StudentReport> getallReport(){
+        return studentReportService.getallReport();
+    }
+
     @PutMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public int updateStudentReport(@Valid @NonNull @RequestBody StudentReport e){

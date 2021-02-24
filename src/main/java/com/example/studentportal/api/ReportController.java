@@ -4,6 +4,8 @@ package com.example.studentportal.api;
 import com.example.studentportal.model.Report;
 import com.example.studentportal.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +38,12 @@ public class ReportController {
 
     @GetMapping(path = "{id}")
     @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
-    public Report getReportById(@PathVariable("id") String id){
-        return reportService.findReportById(id);
+    public ResponseEntity<byte[]> getReportById(@PathVariable("id") String id){
+        Report r = reportService.findReportById(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + r.getReportName() + "\"")
+                .body(r.getReportData());
     }
 
     @GetMapping(path = "{student}/{id}")
