@@ -21,27 +21,31 @@ public class StudentReportController {
     private StudentReportService studentReportService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public String addStudentReport(@Valid @NonNull @RequestBody StudentReport s){
         return studentReportService.insertStudentReport(s);
     }
 
     @GetMapping(path = "{eid}/{iid}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public List<StudentReport> getStudentByGuideId(@PathVariable("eid") String eid, @PathVariable("iid") String iid){
         return studentReportService.getStudentByGuideId(eid,iid);
     }
 
-
+    @GetMapping(path = "{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+    public List<StudentReport> getStudentById(@PathVariable("id") String id){
+        return studentReportService.getStudentById(id);
+    }
 
     @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public int updateStudentReport(@Valid @NonNull @RequestBody StudentReport e){
         return studentReportService.updateStudentReport(e);
     }
 
     @DeleteMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')  or hasRole('STUDENT')")
     public int deleteStudentReportById(@PathVariable("id") String id){
         return studentReportService.deleteStudentReportById(id);
     }

@@ -27,6 +27,10 @@ public class StudentReportService {
         return studentReportDao.getStudentByGuideId(eid,iid);
     }
 
+    public List<StudentReport> getStudentById(String id){
+        return studentReportDao.getStudentById(id);
+    }
+
     public List<Teacher> getGuideById(String id){
         return studentReportDao.getTeacher(id);
     }

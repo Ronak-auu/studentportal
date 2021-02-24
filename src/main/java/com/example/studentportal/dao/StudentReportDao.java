@@ -14,6 +14,9 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
     @Query(value = "SELECT * FROM StudentReport sr WHERE sr.externalId = :eid AND sr.internalId = :iid", nativeQuery = true)
     List<StudentReport> getStudentByGuideId(@Param("eid") String eid,@Param("iid") String iid);
 
+    @Query(value = "SELECT * FROM StudentReport sr WHERE sr.studentId = :id", nativeQuery = true)
+    List<StudentReport> getStudentById(@Param("id") String id);
+
     @Query(value = "SELECT * FROM Teacher t WHERE t.teacherId = :teacherid",nativeQuery = true)
     List<Teacher> getTeacher(@Param("teacherid") String teacherid);
 
