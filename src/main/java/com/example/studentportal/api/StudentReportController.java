@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("studentreport")
@@ -34,7 +35,7 @@ public class StudentReportController {
 
     @GetMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
-    public List<StudentReport> getStudentById(@PathVariable("id") String id){
+    public Optional<StudentReport> getStudentById(@PathVariable("id") String id){
         return studentReportService.getStudentById(id);
     }
 
