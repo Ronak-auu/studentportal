@@ -41,10 +41,10 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
             "sr.endDate = :enddate WHERE sr.studentId = :studentid " +
             "AND sr.internalId = :internalid AND sr.externalId = :externalid",nativeQuery = true)
     int updateStudentReport(@Param("studentid") String studentid,@Param("internalid") String internalid,
-                                @Param("externalid") String externalid, @Param("projectdefinition") String projectdefinition,
-                                @Param("worklanguage") String worklanguage, @Param("studentpercentage") String studentpercentage,
-                                @Param("companyresources") String companyresources,@Param("joindate") String joindate,
-                                @Param("enddate") String enddate);
+                            @Param("externalid") String externalid, @Param("projectdefinition") String projectdefinition,
+                            @Param("worklanguage") String worklanguage, @Param("studentpercentage") String studentpercentage,
+                            @Param("companyresources") String companyresources,@Param("joindate") String joindate,
+                            @Param("enddate") String enddate);
 
     @Modifying
     @Query("DELETE FROM StudentReport sr where sr.studentId = :id")
