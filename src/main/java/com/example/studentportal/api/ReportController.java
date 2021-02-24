@@ -46,6 +46,12 @@ public class ReportController {
                 .body(r.getReportData());
     }
 
+    @GetMapping(path = "report/{id}")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
+    public Report getReport(@PathVariable("id") String id){
+        return reportService.findReportById(id);
+    }
+
     @GetMapping(path = "{student}/{id}")
     @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
     public List<Report> getReportByStudentId(@PathVariable("id") String id){
