@@ -40,7 +40,7 @@ public class StudentReportService {
             studentReportDao.updateStudentReport(studentReport.getStudentId(),studentReport.getInternalId(),
                     studentReport.getExternalId(),studentReport.getProjectDefinition(),studentReport.getWorkLanguage(),
                     studentReport.getStudentPercentage(),studentReport.getCompanyResources(),studentReport.getJoinDate(),
-                    studentReport.getEndDate());    
+                    studentReport.getEndDate());
             return 1;
 
 
