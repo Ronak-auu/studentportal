@@ -46,9 +46,10 @@ public class Report {
         this.internalStatus = internalStatus;
     }
 
-    public Report(String studentId, String reportNo, String reportDate, String externalStatus, String internalStatus) {
+    public Report(String studentId, String reportNo, String reportName, String reportDate, String externalStatus, String internalStatus) {
         this.studentId = studentId;
         this.reportNo = reportNo;
+        this.reportName = reportName;
         this.reportDate = reportDate;
         this.externalStatus = externalStatus;
         this.internalStatus = internalStatus;

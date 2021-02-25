@@ -24,7 +24,7 @@ public class ReportService {
     public int addReport(MultipartFile file,Report r) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         Report rt = new Report(r.getrId(),r.getStudentId(),r.getReportNo(),
-                file.getBytes(),fileName, file.getContentType(),r.getReportDate(),
+                file.getBytes(),r.getReportName(), file.getContentType(),r.getReportDate(),
                 r.getExternalStatus(),r.getInternalStatus());
         reportDao.save(rt);
         return 1;
