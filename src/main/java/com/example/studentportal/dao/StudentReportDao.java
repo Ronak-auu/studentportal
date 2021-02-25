@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentReportDao extends JpaRepository<StudentReport,String> {
 
@@ -15,7 +16,7 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
     List<StudentReport> getStudentByGuideId(@Param("eid") String eid,@Param("iid") String iid);
 
     @Query(value = "SELECT * FROM StudentReport sr WHERE sr.studentId = :id", nativeQuery = true)
-    List<StudentReport> getStudentById(@Param("id") String id);
+    Optional<StudentReport> getStudentById(@Param("id") String id);
 
     @Query(value = "SELECT * FROM Teacher t WHERE t.teacherId = :teacherid",nativeQuery = true)
     List<Teacher> getTeacher(@Param("teacherid") String teacherid);
@@ -40,10 +41,10 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
             "sr.endDate = :enddate WHERE sr.studentId = :studentid " +
             "AND sr.internalId = :internalid AND sr.externalId = :externalid",nativeQuery = true)
     int updateStudentReport(@Param("studentid") String studentid,@Param("internalid") String internalid,
-                                @Param("externalid") String externalid, @Param("projectdefinition") String projectdefinition,
-                                @Param("worklanguage") String worklanguage, @Param("studentpercentage") String studentpercentage,
-                                @Param("companyresources") String companyresources,@Param("joindate") String joindate,
-                                @Param("enddate") String enddate);
+                            @Param("externalid") String externalid, @Param("projectdefinition") String projectdefinition,
+                            @Param("worklanguage") String worklanguage, @Param("studentpercentage") String studentpercentage,
+                            @Param("companyresources") String companyresources,@Param("joindate") String joindate,
+                            @Param("enddate") String enddate);
 
     @Modifying
     @Query("DELETE FROM StudentReport sr where sr.studentId = :id")
