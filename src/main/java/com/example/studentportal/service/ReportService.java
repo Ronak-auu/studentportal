@@ -44,4 +44,19 @@ public class ReportService {
         reportDao.deleteById(id);
         return 1;
     }
+
+    public void updateReport(Report r) {
+        reportDao.findById(r.getrId()).map(s -> {
+            s.setStudentId(r.getStudentId());
+            s.setReportName(r.getReportName());
+            s.setInternalStatus(r.getInternalStatus());
+            s.setReportNo(r.getReportNo());
+            s.setExternalStatus(r.getExternalStatus());
+            s.setReportData(r.getReportData());
+            s.setReportDate(r.getReportDate());
+            s.setReportType(r.getReportType());
+            reportDao.save(s);
+            return 1;
+        });
+    }
 }

@@ -35,7 +35,7 @@ public class TeacherController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
     public List<Teacher> findAllTeachers(){
         return teacherService.getTeachers();
     }

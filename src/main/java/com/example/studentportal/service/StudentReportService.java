@@ -53,4 +53,12 @@ public class StudentReportService {
     public List<StudentReport> getallReport() {
         return studentReportDao.findAll();
     }
+
+    public List<StudentReport> getStudentByTeacherId(String id) {
+        return studentReportDao.getStudentByTeacherId(id);
+    }
+
+    public List<StudentReport> getStudentByExternalId(String id) {
+        return studentReportDao.getStudentByExternalId(id);
+    }
 }

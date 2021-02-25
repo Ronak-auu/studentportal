@@ -25,7 +25,7 @@ public class ReportController {
     ReportService reportService;
 
     @PostMapping
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     public int addReport(@ModelAttribute(value = "file") MultipartFile file,@ModelAttribute Report r){
         try {
             System.out.println(r);
@@ -58,6 +58,12 @@ public class ReportController {
         return reportService.findReportByStudentId(id);
     }
 
+    @PutMapping
+    @PreAuthorize("hasRole('TEACHER')")
+    public int updateReport(@NonNull @Valid @RequestBody Report r){
+        reportService.updateReport(r);
+        return 1;
+    }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('STUDENT')")

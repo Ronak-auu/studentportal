@@ -51,4 +51,9 @@ public interface StudentReportDao extends JpaRepository<StudentReport,String> {
     int deleteStudentReportById(@Param("id") String id);
 
 
+    @Query(value = "SELECT * FROM StudentReport sr WHERE sr.internalId = :id", nativeQuery = true)
+    List<StudentReport> getStudentByTeacherId(String id);
+
+    @Query(value = "SELECT * FROM StudentReport sr WHERE sr.externalId = :id", nativeQuery = true)
+    List<StudentReport> getStudentByExternalId(String id);
 }

@@ -34,9 +34,21 @@ public class StudentReportController {
     }
 
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')or hasRole('TEACHER')")
     public Optional<StudentReport> getStudentById(@PathVariable("id") String id){
         return studentReportService.getStudentById(id);
+    }
+
+    @GetMapping(path = "teacher/{id}")
+    @PreAuthorize("hasRole('TEACHER')")
+    public List<StudentReport> getStudentByTeacherId(@PathVariable("id") String id){
+        return studentReportService.getStudentByTeacherId(id);
+    }
+
+    @GetMapping(path = "external/{id}")
+    @PreAuthorize("hasRole('TEACHER')")
+    public List<StudentReport> getStudentByExternalId(@PathVariable("id") String id){
+        return studentReportService.getStudentByExternalId(id);
     }
 
     @GetMapping
