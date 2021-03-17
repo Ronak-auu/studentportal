@@ -11,9 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ReportService {
@@ -50,6 +48,11 @@ public class ReportService {
     }
 
     public List<Report> findReportByStudentId(String id) {
+        for (Report report : reportDao.findReportByStudentId(id)) {
+            byte[] encoded = Base64.getEncoder().encode(report.getReportData());
+            System.out.println("Report Name : "+report.getReportName()+
+                    "\n Report Data : " + new String(encoded));
+        }
         return reportDao.findReportByStudentId(id);
     }
 
