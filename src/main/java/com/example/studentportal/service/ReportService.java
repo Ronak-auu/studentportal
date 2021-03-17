@@ -30,6 +30,19 @@ public class ReportService {
         return 1;
     }
 
+    public int addAppReport(MultipartFile file,Report r) throws IOException {
+        //System.out.println("obj "+r);
+        for (int element: r.getReportData()) {
+            System.out.print(element);
+        }
+        //String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        Report rt = new Report(r.getrId(),r.getStudentId(),r.getReportNo(),
+                r.getReportData(),r.getReportName(), r.getReportType(),r.getReportDate(),
+                r.getExternalStatus(),r.getInternalStatus());
+        reportDao.save(rt);
+        return 1;
+    }
+
 
 
     public Report findReportById(String id) {

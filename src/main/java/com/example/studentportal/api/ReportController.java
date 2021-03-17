@@ -36,6 +36,18 @@ public class ReportController {
         }
     }
 
+    @PostMapping(path = "app")
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
+    public int addAppReport(@ModelAttribute(value = "file") MultipartFile file,@ModelAttribute Report r){
+        try {
+            System.out.println(r);
+            return reportService.addAppReport(file,r);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     @GetMapping(path = "{id}")
     @PreAuthorize("hasRole('TEACHER') or hasRole('STUDENT')")
     public ResponseEntity<byte[]> getReportById(@PathVariable("id") String id){
