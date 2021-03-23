@@ -34,10 +34,16 @@ public class TeacherController {
         return teacherService.saveTeacher(teacher);
     }
 
-    @GetMapping(path = "generateId")
+    @GetMapping(path = "generateTId")
     @PreAuthorize("hasRole('ADMIN')")
     public String getTeacherId(){
         return teacherService.getTeacherId();
+    }
+
+    @GetMapping(path = "generateEId")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getExternalId(){
+        return teacherService.getExternalId();
     }
 
     @GetMapping

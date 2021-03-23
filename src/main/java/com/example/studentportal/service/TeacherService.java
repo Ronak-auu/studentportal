@@ -62,4 +62,8 @@ public class TeacherService {
     public String getTeacherId(){
         return "T"+counterService.getTeacherId();
     }
+
+    public String getExternalId(){
+        return "E"+counterService.getTeacherId();
+    }
 }
