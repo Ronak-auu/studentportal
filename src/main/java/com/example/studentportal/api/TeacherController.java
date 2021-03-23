@@ -34,6 +34,12 @@ public class TeacherController {
         return teacherService.saveTeacher(teacher);
     }
 
+    @GetMapping(path = "generateId")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getTeacherId(){
+        return teacherService.getTeacherId();
+    }
+
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')")
     public List<Teacher> findAllTeachers(){

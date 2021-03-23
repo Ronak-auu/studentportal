@@ -47,6 +47,12 @@ public class StudentController {
         return studentService.findStudentById(id);
     }
 
+    @GetMapping(path = "generateId")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getStudentId(){
+        return studentService.getStudentId();
+    }
+
     @PutMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public int updateStudentById(@PathVariable("id") String id,@NonNull @Valid @RequestBody Student s){

@@ -12,6 +12,8 @@ import java.util.Optional;
 public class TeacherService {
     @Autowired
     private TeacherDao teacherDao;
+    @Autowired
+    private CounterService counterService;
 
     public int saveTeacher(Teacher teacher){
        if(!teacherDao.existsByTeacherId(teacher.getTeacherId())) {
@@ -55,5 +57,9 @@ public class TeacherService {
         });
         return 0;
 
+    }
+
+    public String getTeacherId(){
+        return "T"+counterService.getTeacherId();
     }
 }

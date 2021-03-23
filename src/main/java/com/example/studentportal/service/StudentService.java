@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @Transactional
 public class StudentService {
     @Autowired
     private StudentDao studentDAO;
+    @Autowired
+    private CounterService counterService;
 
     public List<Student> getAllStudents() {
         return studentDAO.findAll();
@@ -57,4 +60,9 @@ public class StudentService {
         }
         return 0;
     }
+
+    public String getStudentId(){
+            return "S"+counterService.getStudentId();
+    }
+
 }
